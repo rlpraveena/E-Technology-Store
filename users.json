@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5bf26d34086d9a2f1436d5f0"},"name":"TechAdmin","email":"techadmin@gmail.com","username":"techadmin","password":"$2a$10$lE3mmu0Mx82tOHR9sYwamOO5F/qMeoz2NkkJ2C.PAjTUJKjO228Lu","admin":1,"__v":0}
+{"_id":{"$oid":"5bf270d2cfb16216b4c5ccf2"},"name":"Asmita","email":"dumy@gmail.com","username":"asmita","password":"$2a$10$lvbg5SZmnYGTeWwxV7KLDewPy5tknQaePAqywhau7iAQKLyFVzJVy","admin":0,"__v":0}
