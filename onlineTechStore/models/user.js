@@ -19,9 +19,13 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    items: {
+        type:String,
+    },
     admin: {
         type: Number
     }
+
     
 });
 
