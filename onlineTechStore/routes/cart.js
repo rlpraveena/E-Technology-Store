@@ -3,11 +3,13 @@ var router = express.Router();
 
 // Get Product model
 var Product = require('../models/product');
+var User = require('../models/user');
 
 
 router.get('/add/:product', function (req, res) {
 
     var slug = req.params.product;
+
 
     Product.findOne({slug: slug}, function (err, p) {
         if (err)
@@ -43,6 +45,9 @@ router.get('/add/:product', function (req, res) {
             }
         }
 
+
+
+
         req.flash('success', 'Product added!');
         res.redirect('back');
     });
@@ -55,7 +60,42 @@ router.get('/checkout', function (req, res) {
     if (req.session.cart && req.session.cart.length == 0) {
         delete req.session.cart;
         res.redirect('/cart/checkout');
+        console.log('if');
     } else {
+       var user = req.user;
+        
+if(user)
+        {
+            console.log(req.user._id);
+        }
+        
+    
+
+         var cart = req.session.cart;
+         var items_purchased="";
+          
+         if(cart)
+         {
+            for (var i = 0; i < cart.length; i++) {
+                items_purchased+=cart[i].title;
+                items_purchased+=" ";
+          //   console.log(cart[i].title);
+            }
+         }
+            
+            console.log(items_purchased);
+      
+       if(user)
+        {
+
+       User.findByIdAndUpdate(req.user._id, { $set: {items: items_purchased} },   function(err){  if(err){    console.log(err);  }});
+
+ }
+        
+
+      
+  
+        console.log('else in cart.js');
         res.render('checkout', {
             title: 'Checkout',
             cart: req.session.cart
@@ -95,6 +135,7 @@ router.get('/update/:product', function (req, res) {
     }
 
     req.flash('success', 'Cart updated!');
+
     res.redirect('/cart/checkout');
 
 });
@@ -110,6 +151,9 @@ router.get('/clear', function (req, res) {
 
 
 router.get('/buynow', function (req, res) {
+
+        
+
 
     delete req.session.cart;
     
